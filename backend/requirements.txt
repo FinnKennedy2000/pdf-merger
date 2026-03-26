@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pypdf>=6.0
+pymupdf>=1.24
+img2pdf>=0.5
+pillow>=10.0

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF Merger</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>PDF Merger</h1>
+      <p class="subtitle">Combine PDFs, images, and Word docs into one optimised PDF</p>
+    </header>
+
+    <div id="drop-zone" class="drop-zone">
+      <input type="file" id="file-input" multiple accept=".pdf,.docx,.jpg,.jpeg,.png,.gif,.webp,.zip" hidden />
+      <div class="drop-icon">📎</div>
+      <p class="drop-label">Drop files here or <button class="link-btn" onclick="document.getElementById('file-input').click()">click to upload</button></p>
+      <p class="drop-hint">Supports PDF, DOCX, JPG, PNG, GIF, WEBP, ZIP</p>
+    </div>
+
+    <div id="warning-banner" class="warning-banner hidden">
+      ⚠️ Could not compress to under 5 MB. Output is <span id="warning-size"></span>.
+    </div>
+
+    <div id="file-list" class="file-list hidden">
+      <div class="file-list-header">
+        <span class="file-count" id="file-count">0 files</span>
+        <span class="drag-hint">☰ drag cards to reorder</span>
+      </div>
+      <div id="cards" class="cards"></div>
+    </div>
+
+    <div id="actions" class="actions hidden">
+      <button id="merge-btn" class="merge-btn" onclick="mergeFiles()">
+        <span id="merge-label">Merge &amp; Download PDF</span>
+        <span id="merge-spinner" class="spinner hidden"></span>
+      </button>
+      <button class="clear-btn" onclick="clearAll()">Clear all</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
