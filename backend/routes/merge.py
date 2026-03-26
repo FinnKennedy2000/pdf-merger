@@ -1,4 +1,5 @@
 import uuid
+from datetime import datetime
 from pathlib import Path
 from typing import List
 
@@ -83,9 +84,12 @@ def download(session_id: str, job_id: str, background_tasks: BackgroundTasks):
     if not pdf_path.exists():
         raise HTTPException(status_code=404, detail="Output file not found")
 
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"merged_{timestamp}.pdf"
+
     return FileResponse(
         str(pdf_path),
         media_type="application/pdf",
-        filename="merged.pdf",
-        headers={"Content-Disposition": 'attachment; filename="merged.pdf"'},
+        filename=filename,
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )

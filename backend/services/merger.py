@@ -1,18 +1,17 @@
 from pathlib import Path
 from typing import List
 
-from pypdf import PdfReader, PdfWriter
+import fitz
 
 
 def merge_pdfs(ordered_paths: List[Path], output_path: Path) -> Path:
-    writer = PdfWriter()
+    merged = fitz.open()
 
     for pdf_path in ordered_paths:
-        reader = PdfReader(str(pdf_path))
-        for page in reader.pages:
-            writer.add_page(page)
+        with fitz.open(str(pdf_path)) as doc:
+            merged.insert_pdf(doc)
 
-    with open(output_path, "wb") as f:
-        writer.write(f)
+    merged.save(str(output_path))
+    merged.close()
 
     return output_path

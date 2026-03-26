@@ -102,8 +102,6 @@ def _pass2_resample_images(src: Path, dst: Path, target_dpi: int):
                 if pix.n > 4:
                     pix = fitz.Pixmap(fitz.csRGB, pix)
 
-                # Estimate current DPI from page dimensions vs image resolution
-                # Scale down to target DPI by resizing pixmap
                 rect = page.rect
                 page_width_pt = rect.width
                 page_height_pt = rect.height
@@ -111,7 +109,6 @@ def _pass2_resample_images(src: Path, dst: Path, target_dpi: int):
                 current_w = pix.width
                 current_h = pix.height
 
-                # Points to inches: 72 pts = 1 inch
                 expected_w_at_target = int((page_width_pt / 72) * target_dpi)
                 expected_h_at_target = int((page_height_pt / 72) * target_dpi)
 
@@ -123,8 +120,8 @@ def _pass2_resample_images(src: Path, dst: Path, target_dpi: int):
                     new_w = max(1, int(current_w * scale))
                     new_h = max(1, int(current_h * scale))
                     pix = pix.scale_to(new_w, new_h)
+                    page.replace_image(xref, pixmap=pix)
 
-                doc.update_stream(xref, pix.tobytes("jpg", jpg_quality=75))
                 pix = None
             except Exception:
                 continue
@@ -144,9 +141,8 @@ def _pass3_grayscale(src: Path, dst: Path):
                 pix = fitz.Pixmap(doc, xref)
                 if pix.n > 4:
                     pix = fitz.Pixmap(fitz.csRGB, pix)
-                # Convert to grayscale
                 gray = fitz.Pixmap(fitz.csGRAY, pix)
-                doc.update_stream(xref, gray.tobytes("jpg", jpg_quality=70))
+                page.replace_image(xref, pixmap=gray)
                 gray = None
                 pix = None
             except Exception:
