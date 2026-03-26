@@ -1,5 +1,8 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://YOUR-RAILWAY-APP.railway.app/$1" }
+    {
+      "source": "/api/(.*)",
+      "destination": "https://pdf-merger-production-9b68.up.railway.app/$1"
+    }
   ]
 }
