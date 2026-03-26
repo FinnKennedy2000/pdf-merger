@@ -63,8 +63,7 @@ async def _docx_to_pdf(source: Path, dest_dir: Path) -> Path:
     proc = await asyncio.create_subprocess_exec(
         "soffice",
         "--headless",
-        "--nojava",
-        f"--env:UserInstallation=file://{lo_profile}",
+        f"-env:UserInstallation=file://{lo_profile}",
         "--convert-to", "pdf",
         "--outdir", str(dest_dir),
         str(source),
@@ -80,7 +79,7 @@ async def _docx_to_pdf(source: Path, dest_dir: Path) -> Path:
 
     if proc.returncode != 0:
         raise RuntimeError(
-            f"LibreOffice failed for {source.name}: {stderr.decode()}"
+            f"LibreOffice failed for {source.name}: stdout={stdout.decode()!r} stderr={stderr.decode()!r}"
         )
 
     out_path = dest_dir / (source.stem + ".pdf")
