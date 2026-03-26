@@ -63,6 +63,7 @@ async def _docx_to_pdf(source: Path, dest_dir: Path) -> Path:
     proc = await asyncio.create_subprocess_exec(
         "soffice",
         "--headless",
+        "--nojava",
         f"--env:UserInstallation=file://{lo_profile}",
         "--convert-to", "pdf",
         "--outdir", str(dest_dir),
