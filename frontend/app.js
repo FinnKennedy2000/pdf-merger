@@ -3,6 +3,25 @@ const API_BASE = (window.location.hostname === 'localhost' || window.location.ho
   ? 'http://localhost:8000'
   : '/api';  // Vercel rewrite proxies /api/* to Railway
 
+// ── Theme ─────────────────────────────────────────────────────────────────────
+(function () {
+  const saved = localStorage.getItem('theme') ||
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  applyTheme(saved);
+})();
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+  localStorage.setItem('theme', theme);
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  applyTheme(current === 'dark' ? 'light' : 'dark');
+}
+
 // ── Session ───────────────────────────────────────────────────────────────────
 let sessionId = localStorage.getItem('pdfMergerSession') || crypto.randomUUID();
 localStorage.setItem('pdfMergerSession', sessionId);
