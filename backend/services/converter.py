@@ -31,7 +31,7 @@ def _image_to_pdf(source: Path, out_path: Path) -> Path:
         # Fix EXIF rotation
         img = ImageOps.exif_transpose(img)
 
-        if ext == ".gif":
+        if ext in (".gif", ".tif", ".tiff"):
             # Use first frame only
             img.seek(0)
             img = img.convert("RGBA")

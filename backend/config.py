@@ -8,7 +8,7 @@ CLEANUP_INTERVAL = 900  # 15 minutes
 
 TEMP_DIR = Path("/tmp/sessions")
 
-ALLOWED_EXTS = {".pdf", ".docx", ".jpg", ".jpeg", ".png", ".gif", ".webp", ".zip"}
-IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
+ALLOWED_EXTS = {".pdf", ".docx", ".jpg", ".jpeg", ".png", ".gif", ".webp", ".tif", ".tiff", ".zip"}
+IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".tif", ".tiff"}
 
 MAX_UPLOAD_BYTES = 200 * 1024 * 1024  # 200 MB per upload batch
