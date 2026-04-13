@@ -15,7 +15,7 @@ async def convert_to_pdf(source: Path, dest_dir: Path) -> Path:
 
     if ext in IMAGE_EXTS:
         return _image_to_pdf(source, out_path)
-    elif ext == ".docx":
+    elif ext in (".docx", ".rtf"):
         return await _docx_to_pdf(source, dest_dir)
     elif ext == ".pdf":
         shutil.copy2(source, out_path)
