@@ -85,7 +85,7 @@ def download(session_id: str, job_id: str, background_tasks: BackgroundTasks):
         raise HTTPException(status_code=404, detail="Output file not found")
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"merged_{timestamp}.pdf"
+    filename = f"DP REFERRAL {timestamp}.pdf"
 
     return FileResponse(
         str(pdf_path),
