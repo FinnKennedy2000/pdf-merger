@@ -172,7 +172,7 @@ function typeIcon(type) {
   const t = (type || '').toLowerCase();
   if (['jpg','jpeg','png','gif','webp'].includes(t)) return '🖼️';
   if (t === 'pdf') return '📄';
-  if (t === 'docx') return '📝';
+  if (t === 'doc' || t === 'docx') return '📝';
   return '📎';
 }
 
